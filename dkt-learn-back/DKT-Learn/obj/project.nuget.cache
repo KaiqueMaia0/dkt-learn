@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "SwjlXKhuf80=",
+  "success": true,
+  "projectFilePath": "/home/tacio/Documentos/Dev/Web/React/dkt-learn/dkt-learn-back/DKT-Learn/DKT-Learn.csproj",
+  "expectedPackageFiles": [
+    "/home/tacio/.nuget/packages/microsoft.aspnetcore.openapi/9.0.3/microsoft.aspnetcore.openapi.9.0.3.nupkg.sha512",
+    "/home/tacio/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+  ],
+  "logs": []
+}
