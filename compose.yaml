@@ -1,6 +1,0 @@
-﻿services:
-  dkt-learn:
-    image: dkt-learn
-    build:
-      context: .
-      dockerfile: dkt-learn-back/DKT-Learn/Dockerfile
