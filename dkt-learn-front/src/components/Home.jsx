@@ -1,12 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./Home.css";
+import homeimage from "../components/images/home_photo.png";
+import dktlogo from "../components/images/dktlogo.png";
 
 function Home() {
   return (
     <div className="app">
-      <header className="header">
-        <div className="logo">EduCalc</div>
+      <header className="header" paddingtop="64px">
+        <div className="logo">
+          <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer' }}>
+            <img src={dktlogo} alt="Logo" style={{ width: '100px', height: 'auto', background: 'none' }} />
+          </button>
+        </div>
         <nav>
           <a href="#sobre">Sobre</a>
           <a href="#recursos">Recursos</a>
@@ -29,9 +35,10 @@ function Home() {
               <button className="secondary-button">Ver Preços</button>
             </div>
           </div>
-          <div className="hero-image">
-            {/* Placeholder for hero image */}
-            <div className="image-placeholder">[Imagem Ilustrativa]</div>
+          <div className="main-content" style={{ paddingTop: '100px' }}>
+            <div className="image">
+              <img src={homeimage} alt="Home" style={{ width: '550px', height: 'auto', borderRadius: '12px'}} />
+            </div>
           </div>
         </section>
 
@@ -118,7 +125,7 @@ function Home() {
           </div>
         </div>
         <div className="footer-bottom">
-          <p>© 2024 EduCalc - Todos os direitos reservados.</p>
+          <p>© 2025 DKT Learn - Todos os direitos reservados.</p>
         </div>
       </footer>
     </div>

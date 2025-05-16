@@ -29,18 +29,21 @@ body {
 
 /* Header Styles */
 .header {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  padding-top: 80px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 5%;
-  background-color: var(--background-color);
+  background: linear-gradient(to left, #4b0082, #000000);
+  color: white;
+  text-align: center;
 }
 
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-color);
-}
 
 nav {
   display: flex;
@@ -50,7 +53,7 @@ nav {
 
 nav a {
   text-decoration: none;
-  color: var(--text-color);
+  color: white;
 }
 
 .login-button {
@@ -111,15 +114,6 @@ nav a {
   font-weight: 500;
 }
 
-.hero-image {
-  flex: 1;
-  background-color: var(--gray-light);
-  border-radius: 10px;
-  min-height: 400px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
 
 /* Features Section */
 .features {
