@@ -1,12 +1,11 @@
-/* Auth.css - Styles for Login and Signup components */
-
 .auth-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   background-image: linear-gradient(
-    to bottom,rgba(0, 0, 0, 0.9) 0%,rgba(0, 0, 0, 0.9) 40%,rgba(128, 0, 128, 0.9) 100%);
+    to bottom,rgba(0, 0, 0, 0.9) 0%,rgba(0, 0, 0, 0.9) 40%,rgba(128, 0, 128, 0.9) 100%), 
+    url("/dkt-learn-front/src/components/images/authback.png");
   padding: 20px;
 }
 

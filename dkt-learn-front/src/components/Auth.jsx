@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import AuthService from "../services/AuthService";
 import "./Auth.css";
+import authback from "../components/images/authback.png";
 
 // Login Component
 export function Login() {
