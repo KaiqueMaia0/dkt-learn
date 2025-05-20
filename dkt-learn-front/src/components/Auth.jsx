@@ -32,7 +32,7 @@ export function Login() {
     <div className="auth-container">
       <div className="auth-card">
         <div className="auth-header">
-          <h2>Entrar na EduCalc</h2>
+          <h2>Entrar na DKT Learn</h2>
           <p>Bem-vindo de volta! Entre com seus dados para continuar.</p>
         </div>
 
