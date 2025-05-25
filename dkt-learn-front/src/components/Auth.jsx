@@ -1,7 +1,97 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../services/AuthService";
 import "./Auth.css";
-import authback from "../components/images/authback.png";
+
+// ForgotPassword Component
+export function ForgotPassword() {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    setLoading(true);
+
+    if (!email) {
+      setError("Por favor, insira seu email");
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const response = await AuthService.forgotPassword(email);
+      // Consider any response as success since the email was sent
+      setSuccess("Código de recuperação enviado com sucesso!");
+      // Redireciona para a página de reset de senha após 2 segundos
+      setTimeout(() => {
+        navigate("/reset-password", {
+          state: { email },
+          replace: true,
+        });
+      }, 2000);
+    } catch (error) {
+      console.error("Erro ao recuperar senha:", error);
+      if (error.message.includes("não encontrado")) {
+        setError("Email não encontrado em nossa base de dados");
+      } else if (error.message.includes("inválido")) {
+        setError("Por favor, insira um email válido");
+      } else {
+        setError(
+          "Erro ao processar a solicitação. Por favor, tente novamente mais tarde."
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-card">
+        <div className="auth-header">
+          <h2>Recuperar Senha</h2>
+          <p>Digite seu email para receber o código de recuperação.</p>
+        </div>
+
+        {error && <div className="error-message">{error}</div>}
+        {success && <div className="success-message">{success}</div>}
+
+        <form onSubmit={handleSubmit} className="auth-form">
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="seu@email.com"
+              required
+              disabled={loading}
+            />
+          </div>
+
+          <button type="submit" className="auth-button" disabled={loading}>
+            {loading ? "Enviando..." : "Enviar Código"}
+          </button>
+        </form>
+
+        <div className="auth-footer">
+          <p>
+            Lembrou sua senha?{" "}
+            <Link to="/login" className="auth-link">
+              Voltar para o login
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 // Login Component
 export function Login() {
@@ -10,6 +100,7 @@ export function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,13 +108,45 @@ export function Login() {
     setLoading(true);
 
     try {
-      await AuthService.login(emailOrUsername, password, rememberMe);
-      // Redireciona para a página inicial após login
-      window.location.href = "/home";
-    } catch (error) {
-      setError(
-        error.message || "Erro ao fazer login. Verifique suas credenciais."
+      console.log("Tentando login com:", {
+        emailOrUsername,
+        password,
+        rememberMe,
+      });
+      const response = await AuthService.login(
+        emailOrUsername,
+        password,
+        rememberMe
       );
+      console.log("Resposta do login:", response);
+
+      // Redireciona para a página inicial após o login bem-sucedido
+      navigate("/home");
+    } catch (error) {
+      console.error("Erro ao realizar login:", error);
+
+      // Mensagens de erro mais amigáveis
+      if (error.message.includes("Email ou senha incorretos")) {
+        setError(
+          "Email ou senha incorretos. Por favor, verifique suas credenciais."
+        );
+      } else if (error.message.includes("Conta não encontrada")) {
+        setError(
+          "Conta não encontrada. Verifique se o email está correto ou crie uma nova conta."
+        );
+      } else if (error.message.includes("Conta bloqueada")) {
+        setError(
+          "Sua conta está bloqueada ou desativada. Entre em contato com o suporte."
+        );
+      } else if (error.message.includes("credenciais")) {
+        setError(
+          "Email ou senha incorretos. Por favor, verifique suas credenciais."
+        );
+      } else {
+        setError(
+          error.message || "Erro ao realizar login. Por favor, tente novamente."
+        );
+      }
     } finally {
       setLoading(false);
     }
@@ -74,9 +197,9 @@ export function Login() {
               />
               <label htmlFor="remember">Lembrar-me</label>
             </div>
-            <a href="#reset" className="forgot-password">
+            <Link to="/forgot-password" className="forgot-password">
               Esqueceu a senha?
-            </a>
+            </Link>
           </div>
 
           <button type="submit" className="auth-button" disabled={loading}>
@@ -98,9 +221,9 @@ export function Login() {
         <div className="auth-footer">
           <p>
             Não tem uma conta?{" "}
-            <a href="/signup" className="auth-link">
+            <Link to="/signup" className="auth-link">
               Cadastre-se
-            </a>
+            </Link>
           </p>
         </div>
       </div>
@@ -157,7 +280,7 @@ export function Signup() {
     <div className="auth-container">
       <div className="auth-card signup-card">
         <div className="auth-header">
-          <h2>Criar Conta na EduCalc</h2>
+          <h2>Criar Conta na DKT Learn</h2>
           <p>Junte-se a milhares de estudantes e professores</p>
         </div>
 
@@ -277,9 +400,9 @@ export function Signup() {
         <div className="auth-footer">
           <p>
             Já tem uma conta?{" "}
-            <a href="/login" className="auth-link">
+            <Link to="/login" className="auth-link">
               Entrar
-            </a>
+            </Link>
           </p>
         </div>
       </div>
