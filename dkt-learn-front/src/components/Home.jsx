@@ -14,7 +14,7 @@ function Home() {
           </button>
         </div>
         <nav>
-          <a href="#sobre">Sobre</a>
+          <Link to="/about" className="about-button">Sobre</Link>
           <a href="#recursos">Recursos</a>
           <a href="#precos">Preços</a>
           <a href="#contato">Contato</a>

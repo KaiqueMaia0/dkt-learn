@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Inicial.css";
 import AuthService from "../services/AuthService";
 
-function Inicial() {
+function Inicial() 
+{
   const [showDropdown, setShowDropdown] = React.useState(false);
   const navigate = useNavigate();
   const currentUser = AuthService.getCurrentUser();

@@ -7,6 +7,7 @@ import Inicial from "./components/Inicial";
 import Community from "./pages/Community";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
+import About from "./pages/About";
 
 function App() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function App() {
     "/signup",
     "/forgot-password",
     "/reset-password",
+    "/about",
   ];
 
   const shouldShowHeader = !noHeaderRoutes.includes(location.pathname);
@@ -52,6 +54,9 @@ function App() {
       case "/configuracoes":
         pageTitle = "Configurações | DKT Learn";
         break;
+      case "/about":
+        pageTitle = "Sobre | DKT Learn";
+        break;
       default:
         pageTitle = "DKT Learn";
         break;
@@ -72,6 +77,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
         <Route path="/home" element={<Inicial />} />
+        <Route path="/about" element={<About />} />
         <Route path="/community" element={<Community />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/materiais" element={<div>Materiais Page</div>} />

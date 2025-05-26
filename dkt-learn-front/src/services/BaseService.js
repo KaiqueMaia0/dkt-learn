@@ -2,7 +2,8 @@ import axios from "axios";
 
 const API_URL = "http://localhost:5027";
 
-class BaseService {
+class BaseService 
+{
   constructor() {
     this.api = axios.create({
       baseURL: API_URL,
